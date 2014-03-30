@@ -2,7 +2,7 @@
 <?php
 # fbget project
 # by ne0d34th
-# this is a function for sending message with cURL (and without API ofc :p )
+# this is a function for sending message with cURL (and without API ofc :p ) (can be server side / client side function)
 # usage: fbget_send([message], [recipient's user id], [recipient's user name], [cookie file used])
 # next: automating recipient's user id and user name input by user can just input account url
 # warning: still in "debugging" stage, will cut down some unecessary output.
