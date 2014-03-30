@@ -2,7 +2,7 @@
 <?php
 # fbget project
 # by ne0d34th
-# this is a function for logging in and store the session in cookie file
+# this is a function for logging in and store the session in cookie file (can be server / client side function)
 # usage: fbget_login([email], [password], [cookie file])
 # next: see those "random" hidden form i should POST with cURL below? i think i should investigate it whether it affect the login process or something like what happened in send message form
 # but somehow, this code works :D
