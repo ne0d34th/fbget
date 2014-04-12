@@ -10,6 +10,10 @@
 function fbget_login($email, $pass, $cok)
 {
 echo "Tes tes\n";
+if(file_exists($cok))
+{
+unlink($cok);
+}
 $url = "https://mbasic.facebook.com/";
 $head[] = "Accept: */*";
 $head[] = "Connection: Keep-Alive";
@@ -20,8 +24,6 @@ curl_setopt($c, CURLOPT_HEADER,  0);
 curl_setopt($c, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($c, CURLOPT_COOKIEFILE, $cok);
-curl_setopt($c, CURLOPT_COOKIEJAR, $cok); 
 curl_setopt($c, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
 curl_setopt($c, CURLOPT_FOLLOWLOCATION, 1);
 $res = curl_exec($c);
@@ -31,18 +33,34 @@ $fff = array(
 'email'=>$email,
 'pass'=>$pass,
 'login'=>"Log In",
-'lsd'=>"AVoCf66t",
-'charset_test'=>"",
+'charset_test'=>"%E2%82%AC%2C%C2%B4%2C%E2%82%AC%2C%C2%B4%2C%E6%B0%B4%2C%D0%94%2C%D0%84",
 'version'=>'1',
 'ajax'=>'0',
 'width'=>'0',
 'pxr'=>'0',
-'gps'=>'0',
-'m_ts'=>'1385037769',
-'li'=>'yf-NUs6LpSuE1hmq9gYxSa7v',
-'signup_layout'=>'layout|bottom_clean||wider_form||prmnt_btn|special||st|create||header_crt_acct_button||hdbtn_color|green||signupinstr||launched_Mar3',
-'_fb_noscript'=>'true');
+'gps'=>'0');
+
+echo "\n\nCAPEK GA SIH?\n\n";
+$susah = preg_split("/".base64_decode("PGlucHV0IHR5cGU9ImhpZGRlbiIgbmFtZT0ibHNkIiB2YWx1ZT0i")."/", $res);
+$susah = preg_split("/".base64_decode("XCIgYXV0b2NvbXBsZXRlPVwib2ZmXCI=")."/", $susah[1]);
+echo $susah[0];
+$fff['lsd'] = $susah[0];
+
+echo "\n\nCAPEK GA SIH?\n\n";
+$susah = preg_split("/".base64_decode("PGlucHV0IHR5cGU9ImhpZGRlbiIgYXV0b2NvbXBsZXRlPSJvZmYiIG5hbWU9Im1fdHMiIHZhbHVlPSI=")."/", $res);
+$susah = preg_split("/".base64_decode("XCIgXC8+")."/", $susah[1]);
+echo $susah[0];
+$fff['m_ts'] = $susah[0];
+
+echo "\n\nCAPEK GA SIH?\n\n";
+$susah = preg_split("/".base64_decode("PGlucHV0IHR5cGU9ImhpZGRlbiIgYXV0b2NvbXBsZXRlPSJvZmYiIG5hbWU9ImxpIiB2YWx1ZT0i")."/", $res);
+$susah = preg_split("/".base64_decode("XCIgXC8+")."/", $susah[1]);
+echo $susah[0];
+$fff['li'] = $susah[0];
+
 $pf = http_build_query($fff);
+curl_setopt($c, CURLOPT_COOKIEFILE, $cok);
+curl_setopt($c, CURLOPT_COOKIEJAR, $cok); 
 curl_setopt($c, CURLOPT_URL, $url);
 curl_setopt($c, CURLOPT_POST, 1);
 curl_setopt($c, CURLOPT_POSTFIELDS, $pf);
